@@ -1,3 +1,15 @@
+/**
+ * Category Component
+ *
+ * This component displays products belonging to a specific category and provides filtering options.
+ * It retrieves products from the API based on the selected category and filtering criteria.
+ *
+ * @component
+ * @example
+ * import Category from "./Category";
+ * // Inside the parent component's render function, assuming 'id' is the category ID:
+ * <Category />
+ */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -9,12 +21,14 @@ const Category = () => {
   const { id } = useParams();
   const { list } = useSelector(({ categories }) => categories);
 
+  // Default values for filtering products
   const defaultValues = {
     title: "",
     price_min: 0,
     price_max: 0,
   };
 
+  // Default parameters for API request
   const defaultParams = {
     categoryId: id,
     limit: 5,
@@ -22,14 +36,17 @@ const Category = () => {
     ...defaultValues,
   };
 
+  // State variables for handling API response and filtering
   const [isEnd, setEnd] = useState(false);
   const [cat, setCat] = useState(null);
   const [items, setItems] = useState([]);
   const [values, setValues] = useState(defaultValues);
   const [params, setParams] = useState(defaultParams);
 
+  // API call to fetch products based on the current parameters
   const { data = [], isLoading, isSuccess } = useGetProductsQuery(params);
 
+  // Reset filter values and items when the category ID changes
   useEffect(() => {
     if (!id) return;
     setValues(defaultValues);
@@ -39,22 +56,26 @@ const Category = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  // Update the list of displayed items when the API call is successful
   useEffect(() => {
     if (isLoading) return;
     if (!data.length) return setEnd(true);
     setItems((_items) => [..._items, ...data]);
   }, [data, isLoading]);
 
+  // Find and set the current category information from the category list
   useEffect(() => {
     if (!id || !list.length) return;
     const category = list.find((item) => item.id === id * 1);
     setCat(category);
   }, [list, id]);
 
+  // Handle changes in filter inputs and update the filter values
   const handleChange = ({ target: { value, name } }) => {
     setValues({ ...values, [name]: value });
   };
 
+  // Handle the form submission to trigger the API request with updated filters
   const handleSubmit = (e) => {
     e.preventDefault();
     setItems([]);
@@ -62,6 +83,7 @@ const Category = () => {
     setParams({ ...defaultParams, ...values });
   };
 
+  // Handle the reset button click to reset filters to their default values
   const handleReset = () => {
     setValues(defaultValues);
     setParams(defaultParams);

@@ -1,3 +1,15 @@
+/**
+ * Cart Component
+ *
+ * This component displays the user's shopping cart, including items, quantities, prices, and total price.
+ * It allows users to add or remove items and update their quantities in the cart.
+ *
+ * @component
+ * @example
+ * import Cart from "./Cart";
+ * // Inside the parent component's render function:
+ * <Cart />
+ */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,13 +20,25 @@ import styles from "./Cart.module.css";
 import { sumBy } from "../../utils/common";
 
 const Cart = () => {
+  // Redux hooks
   const dispatch = useDispatch();
   const { cart } = useSelector(({ user }) => user);
 
+  /**
+   * Change the quantity of an item in the cart.
+   *
+   * @param {Object} item - The item object to be updated.
+   * @param {number} quantity - The new quantity for the item.
+   */
   const changeQuantity = (item, quantity) => {
     dispatch(addItemToCart({ ...item, quantity }));
   };
 
+  /**
+   * Remove an item from the cart.
+   *
+   * @param {number} id - The ID of the item to be removed.
+   */
   const removeItem = (id) => {
     dispatch(removeItemFromCart(id));
   };
@@ -86,7 +110,10 @@ const Cart = () => {
             <div className={styles.total}>
               TOTAL PRICE:{" "}
               <span>
-                {sumBy(cart.map(({ quantity, price }) => quantity * price))}$
+                {sumBy(
+                  cart.map(({ quantity, price }) => quantity * price)
+                )}
+                $
               </span>
             </div>
             <button className={styles.proceed}>Proceed to checkout</button>
