@@ -1,14 +1,14 @@
 /**
  * Products Component
  *
- * This component represents a list of products displayed on a page or section.
- * It can be used to showcase a collection of products with their images, titles, categories, prices, and purchase statistics.
+ * Этот компонент представляет собой список товаров, отображаемых на странице или в разделе.
+ * Его можно использовать для демонстрации коллекции продуктов с их изображениями, названиями, ценами.
  *
  * @component
- * @param {string} title - The title to display above the list of products (optional).
- * @param {Object} style - Additional styles to apply to the section (optional).
- * @param {Array} products - An array of product objects containing information about each product.
- * @param {number} amount - The maximum number of products to display (optional).
+ * @param {string} title - Заголовок, отображаемый над списком товаров (необязательно).
+ * @param {Object} style - стили(необязательно)
+ * @param {Array} products - Массив объектов продукта, содержащий информацию о каждом продукте.
+ * @param {number} amount - Максимальное количество товаров для отображения (необязательно).
  * @example
  * import Products from "./Products";
  * // Inside the parent component's render function:
@@ -20,7 +20,7 @@
  *     price: 19.99,
  *     images: ["image1.jpg", "image2.jpg", "image3.jpg"],
  *   },
- *   // Add more product objects...
+ *   // Добавить больше объектов продукта...
  * ];
  * <Products title="Featured Products" products={productList} amount={4} />
  */

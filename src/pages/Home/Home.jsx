@@ -7,22 +7,19 @@ import Categories from "../../components/Categories/Categories";
 import Banner from "../../components/Banner/Banner";
 
 const Home = () => {
-  // Get the dispatch function from the Redux store
   const dispatch = useDispatch();
 
-  // Get relevant data from the Redux store using useSelector
   const {
     products: { list, filtered },
     categories,
   } = useSelector((state) => state);
 
-  // Fetch products with a price less than 100 when the component mounts
+  // Выбрать товары с ценой меньше 100 при монтировании компонента
   useEffect(() => {
-    if (!list.length) return; // If the list is empty, no need to fetch products
-    dispatch(filterByPrice(100)); // Dispatch the "filterByPrice" action with 100 as the max price
+    if (!list.length) return;
+    dispatch(filterByPrice(100));
   }, [dispatch, list.length]);
 
-  // Render the components with the fetched data
   return (
     <>
       <Poster />

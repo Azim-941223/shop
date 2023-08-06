@@ -1,12 +1,12 @@
 /**
  * Categories Component
  *
- * This component displays a list of categories with their corresponding products.
+ * Этот компонент отображает список категорий с соответствующими им продуктами.
  *
  * @component
- * @param {string} title - The title of the category section.
- * @param {Array} products - An array of product objects belonging to the category. Default is an empty array.
- * @param {number} amount - The maximum number of products to be displayed. Defaults to showing all products.
+ * @param {string} title - Название категории.
+ * @param {Array} products - Массив объектов продукта, принадлежащих категории. По умолчанию это пустой массив.
+ * @param {number} amount - Максимальное количество отображаемых товаров. По умолчанию отображаются все продукты.
  * @example
  * import Categories from "./Categories";
  * // Inside the parent component's render function:
@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import styles from "./Categories.module.css";
 
 const Categories = ({ title, products = [], amount }) => {
-  // If the 'amount' prop is provided, filter the products to display only the specified number of items.
+  // Если указан «количество», отфильтруйте продукты что бы указать кол-во товаров
   const list = products.filter((_, i) => i < amount);
 
   return (
@@ -25,7 +25,7 @@ const Categories = ({ title, products = [], amount }) => {
       <h2>{title}</h2>
       <div className={styles.list}>
         {list.map(({ id, name, image }) => (
-          // Create a Link to the category page with the category ID as the URL parameter.
+          // Ссылку на страницу категории с ID категории в качестве параметра.
           <Link to={`/categories/${id}`} key={id} className={styles.item}>
             <div
               className={styles.image}

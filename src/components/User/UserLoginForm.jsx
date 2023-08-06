@@ -6,15 +6,15 @@ import styles from "./User.module.css";
 /**
  * UserLoginForm Component
  *
- * The UserLoginForm component represents a form for user login. It allows users to
- * enter their email and password, and upon successful login, it dispatches the loginUser
- * action to authenticate the user. The form uses local state with the useState hook to
- * manage input values and the useDispatch hook from `react-redux` to dispatch the action.
+ * Компонент UserLoginForm форма для входа пользователя. Это позволяет пользователям
+ * вводить адрес электронной почты и пароль, и после успешного входа он отправляет loginUser
+ * действие для аутентификации пользователя. Форма использует локальное состояние с хуком useState для
+ * управления входными значениями и хуком useDispatch из `react-redux` для отправки действия.
  *
- * @param {Object} props - The component props.
- * @param {Function} props.toggleCurrentFormType - A function to toggle between signup and login form.
- * @param {Function} props.closeForm - A function to close the current form.
- * @returns {JSX.Element} The JSX representation of the UserLoginForm component.
+ * @param {Object} props - propsы.
+ * @param {Function} props.toggleCurrentFormType - Функция для переключения между регистрацией и логином.
+ * @param {Function} props.closeForm - Функция закрытия текущей формы.
+ * @returns {JSX.Element} JSX-компонента UserLoginForm.
  */
 const UserLoginForm = ({ toggleCurrentFormType, closeForm }) => {
   const dispatch = useDispatch();
@@ -24,11 +24,11 @@ const UserLoginForm = ({ toggleCurrentFormType, closeForm }) => {
   });
 
   /**
-   * Handle Form Input Changes
+   * Handle Form изменение inputa
    *
-   * Updates the state with the new input values when the user types in the form fields.
+   * Обновляет состояние новыми значениями, когда пользователь вводит данные.
    *
-   * @param {Object} event - The input change event.
+   * @param {Object} event - Input change.
    */
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -36,11 +36,11 @@ const UserLoginForm = ({ toggleCurrentFormType, closeForm }) => {
   };
 
   /**
-   * Handle Form Submission
+   * Обработка отправки формы
    *
-   * Dispatches the loginUser action to authenticate the user if all required fields are filled.
+   * Отправляет loginUser для аутентификации пользователя, если все обязательные поля заполнены.
    *
-   * @param {Object} event - The form submission event.
+   * @param {Object} event - Отправка формы.
    */
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,7 +59,6 @@ const UserLoginForm = ({ toggleCurrentFormType, closeForm }) => {
       </div>
       <div className={styles.title}>Log In</div>
       <form className={styles.form} onSubmit={handleSubmit}>
-        {/* Input fields for email and password */}
         <div className={styles.group}>
           <input
             type="email"
@@ -82,14 +81,13 @@ const UserLoginForm = ({ toggleCurrentFormType, closeForm }) => {
             required
           />
         </div>
-        {/* Link to switch to the signup form */}
+        {/* Ссылка для перехода к форме регистрации */}
         <div
           onClick={() => toggleCurrentFormType("signup")}
           className={styles.link}
         >
           Create an account
         </div>
-        {/* Login button */}
         <button type="submit" className={styles.submit}>
           Login
         </button>

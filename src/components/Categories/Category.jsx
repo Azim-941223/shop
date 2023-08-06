@@ -1,8 +1,8 @@
 /**
  * Category Component
  *
- * This component displays products belonging to a specific category and provides filtering options.
- * It retrieves products from the API based on the selected category and filtering criteria.
+ * Этот компонент отображает товары, принадлежащие к определенной категории, и предоставляет параметры фильтрации.
+ * Он извлекает продукты из API на основе выбранной категории и критериев фильтрации.
  *
  * @component
  * @example
@@ -21,14 +21,14 @@ const Category = () => {
   const { id } = useParams();
   const { list } = useSelector(({ categories }) => categories);
 
-  // Default values for filtering products
+  // Значения по умолчанию для фильтрации продуктов
   const defaultValues = {
     title: "",
     price_min: 0,
     price_max: 0,
   };
 
-  // Default parameters for API request
+  // Параметры по умолчанию для запроса API
   const defaultParams = {
     categoryId: id,
     limit: 5,
@@ -36,17 +36,16 @@ const Category = () => {
     ...defaultValues,
   };
 
-  // State variables for handling API response and filtering
+  // Состояния для API
   const [isEnd, setEnd] = useState(false);
   const [cat, setCat] = useState(null);
   const [items, setItems] = useState([]);
   const [values, setValues] = useState(defaultValues);
   const [params, setParams] = useState(defaultParams);
 
-  // API call to fetch products based on the current parameters
   const { data = [], isLoading, isSuccess } = useGetProductsQuery(params);
 
-  // Reset filter values and items when the category ID changes
+// Сброс значений и элементов фильтра при изменении идентификатора категории
   useEffect(() => {
     if (!id) return;
     setValues(defaultValues);
@@ -56,26 +55,26 @@ const Category = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  // Update the list of displayed items when the API call is successful
+// Обновляем список элементов при успешном вызове API
   useEffect(() => {
     if (isLoading) return;
     if (!data.length) return setEnd(true);
     setItems((_items) => [..._items, ...data]);
   }, [data, isLoading]);
 
-  // Find and set the current category information from the category list
+  // Найти и установить текущую информацию о категории из списка категорий
   useEffect(() => {
     if (!id || !list.length) return;
     const category = list.find((item) => item.id === id * 1);
     setCat(category);
   }, [list, id]);
 
-  // Handle changes in filter inputs and update the filter values
+  // Обработка изменений во входных данных фильтра и обновление значений фильтра
   const handleChange = ({ target: { value, name } }) => {
     setValues({ ...values, [name]: value });
   };
 
-  // Handle the form submission to trigger the API request with updated filters
+  // Обрабатывать отправку формы, чтобы инициировать запрос API с обновленными фильтрами.
   const handleSubmit = (e) => {
     e.preventDefault();
     setItems([]);
@@ -83,7 +82,7 @@ const Category = () => {
     setParams({ ...defaultParams, ...values });
   };
 
-  // Handle the reset button click to reset filters to their default values
+// Обработка нажатия кнопки сброса для сброса фильтров к их значениям по умолчанию
   const handleReset = () => {
     setValues(defaultValues);
     setParams(defaultParams);

@@ -6,16 +6,16 @@ import styles from "./User.module.css";
 /**
  * UserSignupForm Component
  *
- * The UserSignupForm component represents a form for user registration. It allows users
- * to enter their name, email, password, and avatar URL. Upon successful registration, it
- * dispatches the createUser action to create a new user. The form uses local state with the
- * useState hook to manage input values and the useDispatch hook from `react-redux` to
- * dispatch the action.
+ * Компонент UserSignupForm форма для регистрации пользователя. Это позволяет пользователям
+ * ввести свое имя, адрес электронной почты, пароль и URL-адрес аватара. После успешной регистрации он
+ * отправляет действие createUser для создания нового пользователя. Форма использует локальное состояние с параметром
+ * хук useState для управления входными значениями и хук useDispatch из react-redux в
+ * отправить действие.
  *
- * @param {Object} props - The component props.
- * @param {Function} props.toggleCurrentFormType - A function to toggle between signup and login form.
- * @param {Function} props.closeForm - A function to close the current form.
- * @returns {JSX.Element} The JSX representation of the UserSignupForm component.
+ * @param {Object} props - propsы.
+ * @param {Function} props.toggleCurrentFormType - Функция для переключения между регистрацией и логином.
+ * @param {Function} props.closeForm - Функция закрытия текущей формы.
+ * @returns {JSX.Element} JSX-элемент.
  */
 const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
   const dispatch = useDispatch();
@@ -29,9 +29,9 @@ const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
   /**
    * Handle Form Input Changes
    *
-   * Updates the state with the new input values when the user types in the form fields.
+   * Обновляет состояние новыми входными значениями, когда пользователь вводит данные.
    *
-   * @param {Object} event - The input change event.
+   * @param {Object} event - The input change.
    */
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -39,9 +39,9 @@ const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
   };
 
   /**
-   * Handle Form Submission
+   * HandleSubmit
    *
-   * Dispatches the createUser action to create a new user if all required fields are filled.
+   * Отправляет для создания нового пользователя, если все обязательные поля заполнены.
    *
    * @param {Object} event - The form submission event.
    */
@@ -64,7 +64,6 @@ const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
       <div className={styles.title}>Sign Up</div>
 
       <form className={styles.form} onSubmit={handleSubmit}>
-        {/* Input fields for email, name, password, and avatar */}
         <div className={styles.group}>
           <input
             type="email"
@@ -109,14 +108,12 @@ const UserSignupForm = ({ toggleCurrentFormType, closeForm }) => {
             required
           />
         </div>
-        {/* Link to switch to the login form */}
         <div
           className={styles.link}
           onClick={() => toggleCurrentFormType("login")}
         >
           I already have an account
         </div>
-        {/* Create an account button */}
         <button type="submit" className={styles.submit}>
           Create an account
         </button>

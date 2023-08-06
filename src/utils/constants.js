@@ -1,6 +1,5 @@
 /**
- * The base URL for making API requests to the EscuelaJS API version 1.
- * All API requests should be appended to this base URL to form the complete request URL.
+ * Базовый URL-адресу, все запросы API должны добавляться к этой константе чтобы сформировать полный URL-адрес запроса.
  *
  * @type {string}
  */

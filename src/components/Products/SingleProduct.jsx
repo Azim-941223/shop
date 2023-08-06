@@ -1,12 +1,12 @@
 /**
  * SingleProduct Component
  *
- * This component represents the product detail page for a single product.
- * It fetches the product data using the `useGetProductQuery` hook from the API slice.
- * It also fetches related products based on the current product's category using the `getRelatedProducts` action from the products slice.
- * The component displays the product details using the `Product` component and shows related products using the `Products` component.
- * If the product data is not available or the API request is still loading, it shows a loading indicator.
- * If the product data is not found or there is an error, the component redirects the user to the homepage.
+ * Сведения о продукте для одного продукта.
+ * Извлекает из хука`useGetProductQuery` из API слайса
+ * Он также извлекает сопутствующие товары на основе категории текущего продукта, используя действие `getRelatedProducts` из слайса продуктов.
+ * Компонент отображает сведения о продукте с помощью компонента «Product» и показывает сопутствующие товары с помощью компонента «Products».
+ * Если данные о продукте недоступны или запрос API все еще загружается, отображается индикатор загрузки.
+ * Если данные о товаре не найдены или произошла ошибка, компонент перенаправляет на главную страницу.
  *
  * @component
  * @example
@@ -31,10 +31,10 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const { list, related } = useSelector(({ products }) => products);
 
-  // Fetch the product data using the useGetProductQuery hook
+// Получить данные о продукте с помощью хука useGetProductQuery
   const { data, isLoading, isFetching, isSuccess } = useGetProductQuery({ id });
 
-  // Redirect to the homepage if the product data is not available or there is an error
+// Перенаправление на домашнюю страницу, если данные о продукте недоступны или есть ошибка
   useEffect(() => {
     if (!isFetching && !isLoading && !isSuccess) {
       navigate('/');
@@ -50,14 +50,13 @@ const SingleProduct = () => {
   }, [data, dispatch, list.length]);
 
   return !data ? (
-    // Show a loading indicator if the product data is not available yet
+// Показать индикатор загрузки, если данные о продукте еще недоступны
     <section className="preloader">Loading...</section>
   ) : (
-    // Display the product details and related products once the data is available
     <>
-      {/* Display the product details using the Product component */}
+      {/* Отображает данные о просукте с компонента Product */}
       <Product {...data} />
-      {/* Display related products using the Products component */}
+      {/* Отображает сопутствующие товары*/}
       <Products products={related} amount={5} title="Related products" />
     </>
   );

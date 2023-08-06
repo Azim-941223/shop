@@ -1,7 +1,6 @@
 /**
- * Header component for the website.
- * This component displays the website logo, user information, search bar,
- * favorites link, cart link, and cart item count.
+ * Этот компонент отображает логотип сайта, информацию о пользователе, панель поиска,
+ * ссылка на избранное, ссылка на корзину и количество товаров в корзине.
  */
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -48,16 +47,13 @@ const Header = () => {
 
   return (
     <div className={styles.header}>
-      {/* Logo */}
       <div className={styles.logo}>
         <Link to={'/'}>
           <img src={LOGO} alt="Stuff" />
         </Link>
       </div>
 
-      {/* User Information and Search Bar */}
       <div className={styles.info}>
-        {/* User Section */}
         <div className={styles.user} onClick={handleClick}>
           <div
             className={styles.avatar}
@@ -66,10 +62,8 @@ const Header = () => {
           <div className={styles.username}>{values.name}</div>
         </div>
 
-        {/* Search Bar */}
         <form className={styles.form}>
           <div className={styles.icon}>
-            {/* SVG icon for search */}
             <svg className="icon">
               <use xlinkHref={`${process.env.PUBLIC_URL}/sprite.svg#search`} />
             </svg>
@@ -84,7 +78,6 @@ const Header = () => {
               value={searchValue}
             />
           </div>
-          {/* Display search results */}
           {searchValue && (
             <div className={styles.box}>
               {isLoading

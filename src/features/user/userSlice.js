@@ -1,11 +1,8 @@
-// Import necessary dependencies and constants
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 
-// --- Asynchronous Action Creators (Thunks) ---
-
-// createUser: Thunk for creating a new user by making a POST request to the server.
+// Создания нового пользователя POST-запроса на сервер.
 export const createUser = createAsyncThunk(
   "users/createUser",
   async (payload, thunkAPI) => {
@@ -19,8 +16,8 @@ export const createUser = createAsyncThunk(
   }
 );
 
-// loginUser: Thunk for user login by making a POST request to the server for authentication
-// and retrieving user profile data with an access token.
+// loginUser: преобразователь для входа пользователя, отправив запрос POST на сервер для аутентификации
+// и получение данных профиля пользователя с токеном доступа.
 export const loginUser = createAsyncThunk(
   "users/loginUser",
   async (payload, thunkAPI) => {
@@ -39,7 +36,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// updateUser: Thunk for updating user data by making a PUT request to the server.
+// Обновление пользовательских данных PUT запрос на сервер.
 export const updateUser = createAsyncThunk(
   "users/updateUser",
   async (payload, thunkAPI) => {
@@ -53,32 +50,27 @@ export const updateUser = createAsyncThunk(
   }
 );
 
-// --- Reducer Functions ---
 
-// addCurrentUser: A helper function to update the currentUser state with the payload data.
 const addCurrentUser = (state, { payload }) => {
   state.currentUser = payload;
 };
 
-// --- Redux Slice Definition ---
 
 const userSlice = createSlice({
-  name: "user", // The name of the Redux slice.
+  name: "user",
   initialState: {
-    // The initial state of the user slice.
-    currentUser: null, // Current user data (null if not logged in).
-    cart: [], // An array to store items in the user's shopping cart.
-    isLoading: false, // A flag to indicate if there is an ongoing API call.
-    formType: "signup", // The type of form to display (signup/login).
-    showForm: false, // A flag to indicate whether to display the user form or not.
+    currentUser: null,
+    cart: [],
+    isLoading: false,
+    formType: "signup",
+    showForm: false,
   },
   reducers: {
-    // Reducer functions for handling synchronous actions.
     addItemToCart: (state, { payload }) => {
-      // Add an item to the user's shopping cart or update its quantity.
-      // If the item is not in the cart, it will be added with a quantity of 1.
-      // If the item is already in the cart, its quantity will be updated.
-      // The payload contains the item data and optionally the quantity to update.
+      // Добавить товар в корзину пользователя или обновить его количество.
+      // Если товара нет в корзине, он будет добавлен в количестве 1.
+      // Если товар уже есть в корзине, его количество будет обновлено.
+      // Полезная нагрузка содержит данные об элементе и, возможно, количество для обновления.
       let newCart = [...state.cart];
       const found = state.cart.find(({ id }) => id === payload.id);
       if (found) {
@@ -93,27 +85,22 @@ const userSlice = createSlice({
       state.cart = newCart;
     },
     removeItemFromCart: (state, { payload }) => {
-      // Remove an item from the user's shopping cart based on its ID.
       state.cart = state.cart.filter(({ id }) => id !== payload);
     },
     toggleForm: (state, { payload }) => {
-      // Toggle the display of the user form.
       state.showForm = payload;
     },
     toggleFormType: (state, { payload }) => {
-      // Toggle the form type between "signup" and "login".
       state.formType = payload;
     },
   },
   extraReducers: (builder) => {
-    // Extra reducers to handle actions dispatched by createAsyncThunk.
     builder.addCase(createUser.fulfilled, addCurrentUser);
     builder.addCase(loginUser.fulfilled, addCurrentUser);
     builder.addCase(updateUser.fulfilled, addCurrentUser);
   },
 });
 
-// --- Export Actions and Reducer ---
 
 export const {
   addItemToCart,

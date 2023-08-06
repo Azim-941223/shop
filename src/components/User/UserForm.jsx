@@ -8,10 +8,9 @@ import { toggleForm, toggleFormType } from "../../features/user/userSlice";
 /**
  * UserForm Component
  *
- * The UserForm component is responsible for rendering the user signup or login form
- * based on the formType stored in the Redux store. It uses the useSelector hook from
- * `react-redux` to access the current state of the user form, and useDispatch hook to
- * dispatch actions to toggle the form and change the formType.
+ * Компонент UserForm отвечает за отображение формы регистрации или входа пользователя.
+ * Он использует хук useSelector из `react-redux` для доступа к текущему состоянию пользовательской формы и хук useDispatch для
+ * Отправка действий для переключения формы и изменения formType.
  *
  * @returns {JSX.Element} The JSX representation of the UserForm component.
  */
@@ -20,27 +19,23 @@ const UserForm = () => {
   const { showForm, formType } = useSelector(({ user }) => user);
 
   /**
-   * Close the UserForm
+   * Закрыть
    *
-   * Dispatches an action to toggle the user form off when the overlay is clicked.
+   * Отправляет действие для отключения пользовательской формы.
    */
   const closeForm = () => dispatch(toggleForm(false));
 
   /**
-   * Toggle the Current Form Type
    *
-   * Dispatches an action to change the formType in the Redux store.
+   * Отправляет действие для изменения formType в магазине Redux.
    *
-   * @param {string} type - The form type to toggle to (either "signup" or "login").
+   * @param {string} type - Тип формы для переключения (либо «регистрация», либо «логин»).
    */
   const toggleCurrentFormType = (type) => dispatch(toggleFormType(type));
 
   return showForm ? (
     <>
-      {/* The overlay is displayed behind the form and closes the form when clicked */}
       <div className={styles.overlay} onClick={closeForm} />
-
-      {/* Render the UserSignupForm or UserLoginForm based on the formType */}
       {formType === "signup" ? (
         <UserSignupForm
           toggleCurrentFormType={toggleCurrentFormType}

@@ -1,18 +1,18 @@
 /**
- * Shuffles the elements of an array randomly using the Fisher-Yates algorithm.
+ * Случайным образом перемешивает элементы массива.
  *
- * @param {Array} arr - The array to be shuffled.
- * @returns {Array} - A new array with the elements shuffled randomly.
+ * @param {Array} arr - Массив для перемешивания.
+ * @returns {Array} - Новый массив с элементами, перемешанные случайным образом.
  */
 export const shuffle = (arr) => [...arr].sort(() => 0.5 - Math.random());
 
 
 /**
- * Builds a URL string with query parameters based on a base URL and an object of parameters.
+ * Создает строку URL-адреса с параметрами запроса на основе базового URL-адреса и объекта параметров.
  *
- * @param {string} url - The base URL to which the query parameters will be added.
- * @param {Object} params - An object representing the query parameters.
- * @returns {string} - The URL string with the appended query parameters.
+ * @param {string} url - Базовый URL, к которому будут добавлены параметры запроса.
+ * @param {Object} params - Объект, представляющий параметры запроса.
+ * @returns {string} - Строка URL с добавленными параметрами запроса.
  */
 export const buildUrl = (url, params) => {
   let urlWithParams = url;
@@ -26,10 +26,10 @@ export const buildUrl = (url, params) => {
 };
 
 /**
- * Calculates the sum of all elements in an array of numbers.
+ * Вычисляет сумму всех элементов в массиве.
  *
- * @param {Array} arr - The array of numbers for which the sum will be calculated.
- * @returns {number} - The sum of all elements in the array.
+ * @param {Array} arr - Массив чисел, для которых будет вычислена сумма.
+ * @returns {number} - Сумма всех элементов массива.
  */
 export const sumBy = (arr) => arr.reduce((prev, cur) => prev + cur, 0);
 

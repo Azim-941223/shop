@@ -1,8 +1,8 @@
 /**
  * Cart Component
  *
- * This component displays the user's shopping cart, including items, quantities, prices, and total price.
- * It allows users to add or remove items and update their quantities in the cart.
+ * Этот компонент отображает корзину пользователя, включая товары, количество, цены и общую стоимость.
+ * Это позволяет пользователям добавлять или удалять товары и обновлять их количество в корзине.
  *
  * @component
  * @example
@@ -27,17 +27,17 @@ const Cart = () => {
   /**
    * Change the quantity of an item in the cart.
    *
-   * @param {Object} item - The item object to be updated.
-   * @param {number} quantity - The new quantity for the item.
+   * @param {Object} item - Объект элемента, который необходимо обновить.
+   * @param {number} quantity - Новое количество товара.
    */
   const changeQuantity = (item, quantity) => {
     dispatch(addItemToCart({ ...item, quantity }));
   };
 
   /**
-   * Remove an item from the cart.
+   * Удалить товар из корзины.
    *
-   * @param {number} id - The ID of the item to be removed.
+   * @param {number} id - ID элемента, который необходимо удалить.
    */
   const removeItem = (id) => {
     dispatch(removeItemFromCart(id));
